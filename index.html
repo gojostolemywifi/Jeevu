@@ -1,243 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Jeevika! ✨</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Babel for JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-      body { font-family: 'Plus Jakarta Sans', sans-serif; }
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-      }
-      .animate-float { animation: float 3s ease-in-out infinite; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Jeevika!</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body class="bg-rose-50 text-gray-800 min-h-screen">
-    <div id="root"></div>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <div id="root"></div>
 
-    <script type="text/babel">
-      const { useState, useEffect, useMemo, useCallback } = React;
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useCallback } = React;
 
-      // Icons
-      const Lock = ({className}) => <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>;
-      const Heart = ({className}) => <svg className={className} fill="currentColor" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg>;
-      const Camera = ({className}) => <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>;
-      const Send = ({className}) => <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>;
-      const KeyRound = ({className}) => <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>;
-      const Sparkles = ({className}) => <svg className={className} fill="currentColor" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>;
-      const Cake = ({className}) => <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M12 4v2"/></svg>;
+    const NAME = "Jeevika";
+    const BDAY_MONTH = 10; // November (0-indexed)
+    const BDAY_DAY = 15;
+    const CAPTIONS = [
+      "Glowing, even without the diya",
+      "Pink, gold and pure sparkle",
+      "Calm eyes, soft smile, easy day",
+      "Mirror check: curls on point",
+      "Brighter than all the festival lights",
+      "Golden hour found you",
+      "Marigolds and that curious look",
+      "Dressed up and unstoppable",
+      "Twirl-worthy, mirror approved",
+      "Fairy lights, blue night, that smile"
+    ];
 
-      const NAME = "Jeevika";
-      const CAPTIONS = [
-        "Glowing, even without the diya ✨",
-        "Pink, gold and pure sparkle 💖",
-        "Calm eyes, soft smile, easy day 🌸",
-        "Mirror check: curls on point 🪞",
-        "Brighter than all the festival lights 🌟",
-        "Golden hour found you ☀️",
-        "Marigolds and that curious look 🌼",
-        "Dressed up and unstoppable 💃",
-        "Twirl-worthy, mirror approved 🎀",
-        "Fairy lights, blue night, that smile 🌙"
-      ];
+    const PHOTOS = [
+      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCARyAoADASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAAAAECAwQFBgf/xAA+EAACAgEDAgQEBAQEBgICAwAAAQIDEQQhMQUSIjJBUQYTYXEUIzOBNEJykQckUrEVJTVigqFTwUNjc9Hx/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAECAwQF/8QAJBEBAQACAgMBAQEBAQADAAAAAAECEQMxITJBEgQiURMUI2H/2gAMAwEAAhEDEQA/APagFEwZUgC4ABAFABAFABAFEAQBQCkfA31HPgQAFAAAAAAAAAAAAEAUAEAGMc0A8CPvQd6IJBBneHegHgM7w716gPAZ3oO5APAZ3oO8ocAzvDvAeAzvDvAeAzvDuQDwGdwvcA4BuQ7gHANyJ3BDwG9wdwEiHrgZB5JAEYqEHFAIKACCgAQgCgAgCiAAgoAIIxwjIEMf4keNC/ujYMf4l/gH/UiZdN4duIu8rM/S4/GLPJoX8NGbpM/jksnle346nS+RbD575GabyCyZuOVVbuRkeCS3kbg0gQ+I2I9ED0SxexFEdkiodUzOs3ZcvZTnyVY9SABT0PIQBQIEAUAEEFFAaAoYAQQcIwGsEKGAoAAAADAAAAAAIKACAKACNDXBew9gBH2L2DsXsPAgZ2L2D5a9iQTADOxewdi9h+AwUM+WvYOxewdi9h4AEDOxewdi9h4FDOxewdi9h4AZ2L2DsXsPwIA3tDtQ4QBuBcDgAbgO0cGAG9odo4AhvaL2jsAgCMcDwSBlAuRREKAAABAAAAAAAAAACAKACCCiABjfEv8//6kbJj/ABKs6B/SSM5dN4duHv4Zn6VZ13Bo2rZ5KOkTeuZ5Xt+Oj020GObz6CabyMfjY3HGq1i3Gkti3IzSFghQgJKQWFTFbI8jvQy0gv5KsuS3cis47hXp6FGRY9HpeMAKACAKACAAEAAAACMUAGgKACAKACAKACAAAAgoBSC4DABCAKDCkAAAAAAAAwAAAAAAAAAAACMAYAIwFABAFABAFAIQBQABUIOQDkIxQKBCggCAAAAAAAAAAEAUQAAAAQBRAAxviT+Bf9SNkyPiNJ6F/czn03h24izh5KOia/4hyXblhMpaKOOoN+p5Xt+OkpWIsV8BR5WOkjpHGq9nIz0H27MgbKh+cEalyHcNRGoetyRegyKJoIi1DYiFx3Lc4EbgUd+iRDMDkeh5DkAC4AQBQATAYFABMBgUQAEFABMBgXAYAQBcCYIAQUAEAAAAAAAAAKQBQAQBQAYBRAEachr/AP/Z",
+      "data:image/jpeg;base64,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",
+      "data:image/jpeg;base64,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",
+      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCAFoAoADASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAQIAAwQFBgf/xAA9EAACAQIEBAUBBgUDBAIDAAAAAQIDEQQSITEFQVFxEyIyYYFCIzORobHBBhRSYnIk0eEVJTTwQ2MWU8L/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/xAAiEQEBAAICAgMBAQEBAQAAAAAAAAIRAzEhMhJBUQQiYUL/2gAMAwEAAhEDEQA/AMeUmU0ZCeH7Hr04bZ7Ey+xpyEyD4rtmykyvroShogMgybZspMlJlYpyAyDsm2bKTISpUAqCsWNSsEUGUuYgsoE2rQmyiGkQpS0QvI0h8pYpZlGkMoiWEV2JblFlBkaTfB0VlE5Yx3d/4kFYslUqR5au5ZlsnlKVGnTlyvXfT2J6v3kISc3yV30X8/7M+Lz55Tct78o6b4pUoyf1XU471pXZ26M9JwnB58z8PioYyL8VODWllZp+t6dGcfGpr9N7fB5SslUjBq+9tt/tZ6jB8NxKppQj8Sptb68k+z6nL4jI7XwTprn2X8F2pW77dTrM3h7cZ8p36LdnIxlWnTrQoyVpS2T16v2R9BxnD454SVR2jKmuqV07X35tN+3yPLcVhP28V9NNc7X6u7b68q/b2+R6LhuHwuOwrk8d+mqb8rTWvW6W3b0fV2POca6S8Xk838m+50jK1VbO66M0zMhFvPZ6N3V+bV7vR7/AJM9N5j+H4qjW/CUp06qW+q+v6M9Pwf6gYHGqNodeySyfKrdjT4bXJqMrmb8b9j006vNrqrtdX6n2f3e8fwe/uY6t5t+p9t213/b/n08j7f4n9R26/u79+/k9/nf6l5vf/a7dfb/AMv3P2v+X9/2cff99/u3/v5+J39X37299/L9vf9Pz9T4Pffb+71/N+/l8v8Ap9T+o+99uvd39W/j+v6fX8oWq5V3d16b+23fv8/u0/K/f8An26v2p7u99rfvf1u/uWn/nv89zXn7u/m9/b/wAluf7n3t7/AO77u97t/u+n88zN77+r67+X63+fv8j37v8An+d9tvq3v+fb59t9i2v8Ae9v7e77/AOv1/k33X6L97t7bve6/d2t6a6u6b38v23/wBnfjZt69/T3t3/AP8AQ99tvk++9/tuvy92f0t69+jtfz+f1/Myr6v19v+t/b6p3ffy/tWvL99/p6l33f7dfd2+rfb6N7vv8AJ7n5u+vvevffy/2/z6lZ+LtfZfftfb891evv6vT57MvO7X2f293b6tq+/5bvr27kzvfS/p+b/wDZ"
+    ];
 
-      const PHOTOS = [
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=60",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60"
-      ];
+    function App() {
+      const [photoIndex, setPhotoIndex] = useState(0);
+      const [showCard, setShowCard] = useState(false);
+      const [hearts, setHearts] = useState([]);
+      const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-      function App() {
-        const [unlocked, setUnlocked] = useState(false);
-        const [passcode, setPasscode] = useState("");
-        const [activeTab, setActiveTab] = useState("gallery");
-        const [wish, setWish] = useState("");
-        const [wishesList, setWishesList] = useState([
-          "Happy Birthday Jeevika! Wishing you all the success, joy, and endless laughter.",
-          "May your year be filled with golden light, amazing adventures, and wonderful memories!"
-        ]);
-        const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-        const handleUnlock = (e) => {
-          e.preventDefault();
-          if (passcode === "1511" || passcode.toLowerCase() === "jeevika" || passcode === "") {
-            setUnlocked(true);
-          } else {
-            alert("Incorrect passcode! Try her birthday (DDMM, e.g. 1511) or name.");
+      // Countdown logic
+      useEffect(() => {
+        const calculateTime = () => {
+          const now = new Date();
+          let year = now.getFullYear();
+          let bday = new Date(year, BDAY_MONTH, BDAY_DAY, 0, 0, 0);
+          if (now > bday) {
+            bday = new Date(year + 1, BDAY_MONTH, BDAY_DAY, 0, 0, 0);
           }
+          const diff = bday - now;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / 1000 / 60) % 60);
+          const seconds = Math.floor((diff / 1000) % 60);
+          setTimeLeft({ days, hours, minutes, seconds });
         };
+        calculateTime();
+        const timer = setInterval(calculateTime, 1000);
+        return () => clearInterval(timer);
+      }, []);
 
-        const addWish = (e) => {
-          e.preventDefault();
-          if (!wish.trim()) return;
-          setWishesList([wish, ...wishesList]);
-          setWish("");
-        };
+      // Floating hearts effect
+      const triggerHeart = (e) => {
+        const id = Date.now();
+        const x = e.clientX || window.innerWidth / 2;
+        const y = e.clientY || window.innerHeight / 2;
+        setHearts((prev) => [...prev, { id, x, y }]);
+        setTimeout(() => {
+          setHearts((prev) => prev.filter((h) => h.id !== id));
+        }, 1000);
+      };
 
-        if (!unlocked) {
-          return (
-            <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-pink-100 via-rose-100 to-amber-50">
-              <div className="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl max-w-md w-full text-center border border-pink-200 animate-float">
-                <div className="w-20 h-20 bg-gradient-to-tr from-pink-500 to-rose-400 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-pink-200">
-                  <Lock className="w-10 h-10" />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">Special Delivery for {NAME}</h1>
-                <p className="text-gray-500 text-sm mb-6">Enter passcode (DDMM e.g. 1511 or name) to unlock your birthday surprise!</p>
-                <form onSubmit={handleUnlock} className="space-y-4">
-                  <div className="relative">
-                    <KeyRound className="absolute left-4 top-3.5 w-5 h-5 text-pink-400" />
-                    <input
-                      type="password"
-                      value={passcode}
-                      onChange={(e) => setPasscode(e.target.value)}
-                      placeholder="Passcode..."
-                      className="w-full pl-12 pr-4 py-3 bg-pink-50/50 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 text-center tracking-widest font-semibold text-lg"
-                    />
-                  </div>
+      const nextPhoto = () => setPhotoIndex((prev) => (prev + 1) % PHOTOS.length);
+      const prevPhoto = () => setPhotoIndex((prev) => (prev - 1 + PHOTOS.length) % PHOTOS.length);
+
+      return (
+        <div className="min-h-screen bg-slate-950 text-pink-100 flex flex-col items-center justify-center p-4 relative overflow-hidden" onClick={triggerHeart}>
+          {/* Floating Hearts */}
+          {hearts.map((h) => (
+            <span
+              key={h.id}
+              className="absolute text-pink-500 text-2xl pointer-events-none animate-ping"
+              style={{ left: h.x - 12, top: h.y - 12 }}
+            >
+              ❤️
+            </span>
+          ))}
+
+          {/* Main Container */}
+          <div className="max-w-md w-full bg-slate-900/80 backdrop-blur-md border border-pink-500/20 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center space-y-6">
+            
+            {/* Header */}
+            <div>
+              <span className="inline-block bg-pink-500/10 text-pink-400 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold mb-2">
+                Special Day
+              </span>
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-amber-300">
+                Happy Birthday, {NAME}! ✨
+              </h1>
+            </div>
+
+            {/* Photo Gallery Frame */}
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-lg border-2 border-pink-500/30 group">
+              <img
+                src={PHOTOS[photoIndex]}
+                alt={CAPTIONS[photoIndex]}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-4">
+                <p className="text-sm font-medium text-pink-200">
+                  "{CAPTIONS[photoIndex]}"
+                </p>
+                <div className="flex justify-between items-center mt-3">
                   <button
-                    type="submit"
-                    className="w-full py-3.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-2xl shadow-md hover:opacity-95 transition transform active:scale-95"
+                    onClick={(e) => { e.stopPropagation(); prevPhoto(); }}
+                    className="bg-slate-900/60 hover:bg-pink-600 text-white px-3 py-1 rounded-full text-xs transition"
                   >
-                    Unlock Magic ✨
+                    ← Prev
                   </button>
-                </form>
-                <div className="mt-4 text-xs text-gray-400">Hint: Type "1511" or "jeevika"</div>
+                  <span className="text-xs text-slate-400 font-mono">
+                    {photoIndex + 1} / {PHOTOS.length}
+                  </span>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); nextPhoto(); }}
+                    className="bg-slate-900/60 hover:bg-pink-600 text-white px-3 py-1 rounded-full text-xs transition"
+                  >
+                    Next →
+                  </button>
+                </div>
               </div>
             </div>
-          );
-        }
 
-        return (
-          <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-amber-50 pb-16">
-            <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-pink-100 shadow-sm">
-              <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-                <div className="flex items-center space-x-2">
-                  <Sparkles className="w-6 h-6 text-pink-500 animate-pulse" />
-                  <span className="font-bold text-xl bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
-                    Happy Birthday, {NAME}! 🎉
-                  </span>
+            {/* Countdown Box */}
+            <div className="w-full bg-slate-950/50 rounded-xl p-4 border border-pink-500/10">
+              <p className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Countdown to next birthday</p>
+              <div className="grid grid-cols-4 gap-2 text-center font-mono">
+                <div className="bg-slate-900 p-2 rounded-lg">
+                  <span className="block text-xl font-bold text-pink-400">{timeLeft.days}</span>
+                  <span className="text-[10px] text-slate-500">Days</span>
                 </div>
-                <nav className="flex space-x-2">
-                  <button
-                    onClick={() => setActiveTab("gallery")}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition ${activeTab === "gallery" ? "bg-pink-500 text-white shadow-md shadow-pink-200" : "text-gray-600 hover:bg-pink-100/50"}`}
-                  >
-                    Gallery 📸
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("wishes")}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition ${activeTab === "wishes" ? "bg-pink-500 text-white shadow-md shadow-pink-200" : "text-gray-600 hover:bg-pink-100/50"}`}
-                  >
-                    Wishes Wall 💌
-                  </button>
-                </nav>
+                <div className="bg-slate-900 p-2 rounded-lg">
+                  <span className="block text-xl font-bold text-pink-400">{timeLeft.hours}</span>
+                  <span className="text-[10px] text-slate-500">Hours</span>
+                </div>
+                <div className="bg-slate-900 p-2 rounded-lg">
+                  <span className="block text-xl font-bold text-pink-400">{timeLeft.minutes}</span>
+                  <span className="text-[10px] text-slate-500">Mins</span>
+                </div>
+                <div className="bg-slate-900 p-2 rounded-lg">
+                  <span className="block text-xl font-bold text-pink-400">{timeLeft.seconds}</span>
+                  <span className="text-[10px] text-slate-500">Secs</span>
+                </div>
               </div>
-            </header>
+            </div>
 
-            <main className="max-w-4xl mx-auto px-4 py-8">
-              {activeTab === "gallery" && (
-                <div>
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-2">Memory Lane 📸</h2>
-                    <p className="text-gray-500">A collection of gorgeous moments, smiles, and celebrations.</p>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {PHOTOS.map((photo, idx) => (
-                      <div 
-                        key={idx} 
-                        onClick={() => setSelectedPhoto(photo)}
-                        className="bg-white rounded-3xl overflow-hidden shadow-md border border-pink-100 hover:shadow-xl transition group cursor-pointer"
-                      >
-                        <div className="h-64 overflow-hidden relative">
-                          <img src={photo} alt={`Memory ${idx+1}`} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                          <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 rounded-full text-pink-500 shadow">
-                            <Heart className="w-4 h-4 fill-pink-500" />
-                          </div>
-                        </div>
-                        <div className="p-4">
-                          <p className="text-gray-700 text-sm font-medium italic">"{CAPTIONS[idx % CAPTIONS.length]}"</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+            {/* Secret Card Toggle */}
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowCard(!showCard); }}
+              className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-medium py-3 rounded-xl shadow-lg transition transform active:scale-95"
+            >
+              {showCard ? "Hide Surprise Message 💌" : "Open Surprise Message 💌"}
+            </button>
 
-              {activeTab === "wishes" && (
-                <div className="max-w-xl mx-auto">
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-2">Birthday Wishes Wall 💌</h2>
-                    <p className="text-gray-500">Leave a sweet note or birthday wish for {NAME}!</p>
-                  </div>
-
-                  <form onSubmit={addWish} className="bg-white p-6 rounded-3xl shadow-md border border-pink-100 mb-8 space-y-4">
-                    <textarea
-                      rows="3"
-                      value={wish}
-                      onChange={(e) => setWish(e.target.value)}
-                      placeholder="Write your heartfelt wish here..."
-                      className="w-full p-4 bg-pink-50/50 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-400 text-sm"
-                    ></textarea>
-                    <button
-                      type="submit"
-                      className="w-full py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold rounded-2xl shadow-md hover:opacity-95 transition flex items-center justify-center space-x-2"
-                    >
-                      <Send className="w-4 h-4" />
-                      <span>Send Wish</span>
-                    </button>
-                  </form>
-
-                  <div className="space-y-4">
-                    {wishesList.map((w, idx) => (
-                      <div key={idx} className="bg-white p-5 rounded-2xl shadow-sm border border-pink-100 flex items-start space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 font-bold shrink-0">
-                          {idx + 1}
-                        </div>
-                        <p className="text-gray-700 text-sm pt-2">{w}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </main>
-
-            {selectedPhoto && (
-              <div 
-                className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                onClick={() => setSelectedPhoto(null)}
-              >
-                <div className="bg-white rounded-3xl overflow-hidden max-w-lg w-full p-4 relative shadow-2xl">
-                  <img src={selectedPhoto} alt="Zoomed memory" className="w-full h-96 object-cover rounded-2xl mb-4" />
-                  <button 
-                    onClick={() => setSelectedPhoto(null)}
-                    className="w-full py-2.5 bg-pink-500 text-white font-semibold rounded-xl shadow hover:bg-pink-600 transition"
-                  >
-                    Close
-                  </button>
-                </div>
+            {showCard && (
+              <div className="w-full bg-pink-950/30 border border-pink-500/30 p-4 rounded-xl text-left text-sm space-y-2 animate-fadeIn">
+                <p className="text-pink-300 font-semibold">Dearest Jeevika,</p>
+                <p className="text-pink-100/90 leading-relaxed">
+                  May this year bring you as much joy, laughter, and sparkle as you bring into the lives of everyone around you. Keep glowing and shining bright! ✨🎂
+                </p>
               </div>
             )}
-          </div>
-        );
-      }
 
-      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
 </body>
 </html>
