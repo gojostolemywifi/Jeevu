@@ -121,7 +121,7 @@ function Hero({ now }) {
   const u = [["Days", Math.floor(diff / DAY)], ["Hours", Math.floor(diff / 36e5) % 24], ["Minutes", Math.floor(diff / 6e4) % 60], ["Seconds", Math.floor(diff / 1e3) % 60]];
   return (
     <header className="relative text-center px-4 pt-20 pb-16 md:pt-28">
-      <p className="text-sm md:text-base tracking-widest" style={{ color: CYAN }}>{isBday ? "Today is the day" : "Counting down to"}</p>
+      <p className="text-sm md:text-base tracking-widest" style={{ color: CYAN }}>{isBday ? "Today is the day" : "Counting down to the best day"}</p>
       <h1 className="mt-4 font-serif text-white leading-tight text-4xl md:text-7xl" style={{ textShadow: `0 0 40px ${GOLD}77` }}>
         {isBday ? `Happy Birthday, ${NAME}! 🎂` : `Counting Down to ${NAME}'s Special Day ✨`}
       </h1>
